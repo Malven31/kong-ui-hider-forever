@@ -58,6 +58,7 @@ Files are packaged and uploaded by GitHub when a version tag is pushed: `.github
 - **The game version** comes from `## Interface: 16001`, which the packager knows as Forever.
 - **The changelog** of each file is that version's section of `CHANGELOG.md`, in Markdown. `scripts/release-notes.sh` extracts it into `RELEASE_NOTES.md` before packaging, so it shows on the website and in the CurseForge app. The workflow fails if the section is missing or lists nothing.
 - **A missing token fails the run** with an error, instead of the packager silently skipping the upload.
+- **File name and display name:** `KongUIHider-Forever-<version>`, the same as files uploaded by hand.
 - **The release type** comes from the tag: one containing `beta` or `alpha` makes a beta or alpha file, any other a release.
 
 To set it up:
