@@ -13,7 +13,7 @@ Everything the CurseForge project and file upload ask for, ready to paste.
    - The player frame stays up while mana regenerates and fades about 2.5 seconds after it is full.
    - The minimap button opens and closes the settings, right-click turns fading on and off, dragging moves it, and the position survives `/reload`. `/kong minimap` hides and shows it.
    - Logging out raises no error.
-2. **Repository name:** rename `king-kong-frame-fader-forever` to `kong-ui-hider-forever` on GitHub (Settings > General > Repository name). GitHub redirects the old address.
+2. **Repository:** `github.com/Malven31/kong-ui-hider-forever` (renamed from `king-kong-frame-fader-forever`; GitHub redirects the old address).
 3. **Visibility:** the Source and Issues links below only work if the repository is public.
 4. **Logo:** [logo.png](logo.png) (256×256, the port's own). The minimap icon `Kong/media/minimap.tga` is the same design.
 5. **Screenshots:** see [gallery/README.md](gallery/README.md).
