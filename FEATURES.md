@@ -1,6 +1,6 @@
 # Features
 
-Kong UI Hider - Forever is the original **Kong Automatic UI Hider 1.6a** by Xentaros, ported to World of Warcraft: Forever. This page lists what the original does and what the port adds.
+Kong UI Hider - Forever is the original **[Kong Automatic UI Hider](https://www.curseforge.com/wow/addons/kong) 1.6a** by Xentaros, ported to World of Warcraft: Forever. This page lists what the original does and what the port adds.
 
 ## From the original Kong 1.6a
 
@@ -89,6 +89,13 @@ Conditions are built from parts that combine with each other, for example "Unit 
 - **Copy Settings / Paste Settings:** copies one frame's Show When conditions, defaults and advanced options to the selected frames. Mouseover groups are left alone.
 - **Reset Settings:** discards the settings of the selected frames, after a confirmation.
 - Unticking "Hide Selected Frame(s)" keeps the frame's settings, and ticking it again brings them back.
+
+### Minimap button
+
+- A button on the minimap edge with the addon's logo. Left-click opens or closes the settings window, and right-click turns fading on or off.
+- Drag it to move it around the minimap. It follows round and square minimaps (shapes reported by minimap addons such as SexyMap).
+- Its position, and whether it is hidden, are saved for the whole account. `/kong minimap` hides it or brings it back.
+- The logo also appears next to the addon in the addon list, where the game shows addon icons.
 
 ### Diagnostics
 

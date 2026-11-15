@@ -17,6 +17,7 @@ Tips:
 | `05-conditions.png` | A frame's Show When list with a few conditions expanded (for example "in combat" and "chat message within the last 15 seconds") | Show When conditions | Combine conditions on combat, units, health, mana, chat, events and macro conditions. |
 | `06-chat.png` | The chat shown right after a message arrives, the rest of the interface faded | Chat that comes back when you need it | Every chat window, tab and button fades as one, and comes back on mouseover, on new messages or while you type. |
 | `07-mana.png` | The player frame visible while mana regenerates after a cast | Until your mana is full | Keep the player frame up while mana regenerates, and let it fade once mana is full. |
-| `08-details.png` (if you use Details!) | A Details! window faded, then shown on mouseover | Details! support | Details! windows fade as one window, bars included. |
+| `08-minimap.png` | The minimap with the button and its tooltip | Minimap button | Left-click opens the settings, right-click turns fading on or off. |
+| `09-details.png` (if you use Details!) | A Details! window faded, then shown on mouseover | Details! support | Details! windows fade as one window, bars included. |
 
 Rename or drop shots freely.

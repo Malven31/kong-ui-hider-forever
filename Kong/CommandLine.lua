@@ -23,7 +23,8 @@ local NO_KONG_CONFIG = "Kong Config is either disabled or not installed. Default
 local HELP_COMMANDS = "|cFFBBBBFFKong UI Hider - Forever|r commands ( |cFF33FF99/kong|r ):"
 local HELP_TOGGLE = "|cFF33FF99enable / disable / toggle|r: enables or disables fading of the user interface."
 local HELP_PROFILE = "|cFF33FF99profile|r: manages saved Kong configurations and allows for configuration sharing between characters."
-local HELP_POWERLOG = "|cFF33FF99powerlog|r: records mana events for 90 seconds into the saved variables (debugging)."
+local HELP_MINIMAP = "|cFF33FF99minimap|r: hides or shows the minimap button."
+local HELP_POWERLOG ="|cFF33FF99powerlog|r: records mana events for 90 seconds into the saved variables (debugging)."
 local PROFILE_LOADED = "Profile %q loaded."
 local NOW_USING_PROFILE = "Now using profile %q."
 local PROFILE_ALREADY_EXISTS = "Profile %q already exists."
@@ -257,12 +258,15 @@ function A.CommandHandler(args)
 		end
 	elseif ( command == "reset" ) then
 		A.ResetCommandHandler()
+	elseif ( command == "minimap" ) then
+		A.ToggleMinimapButton()
 	elseif ( command == "powerlog" ) then
 		A.StartPowerLog()
 	elseif ( command == "help" ) then
 		print(HELP_COMMANDS)
 		print(HELP_TOGGLE)
 		print(HELP_PROFILE)
+		print(HELP_MINIMAP)
 		print(HELP_POWERLOG)
 	else
 		Kong_Error('"' .. command .. '"' .. INVALID_COMMAND)

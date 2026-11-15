@@ -4,8 +4,9 @@
 ## Version: 1.0.0
 ## Notes: Fades interface frames in and out on the conditions you choose: mouseover, combat, chat, health, mana and more. Type /kong to configure.
 ## SavedVariablesPerCharacter: Kong_Settings
-## SavedVariables: Kong_Profiles
+## SavedVariables: Kong_Profiles, Kong_Minimap
 ## OptionalDeps: Tukui, SexyMap
+## IconTexture: Interface\AddOns\Kong\media\minimap
 ## X-Credits: Based on Kong Automatic UI Hider 1.6a by Xentaros, released into the public domain. Ported to World of Warcraft: Forever by Malven31, with Claude (Anthropic).
 ## X-License: Public Domain
 
@@ -18,3 +19,4 @@ classes\ObjectPool.lua
 
 Kong.lua
 CommandLine.lua
+MinimapButton.lua

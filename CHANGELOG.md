@@ -12,6 +12,7 @@ First public release of Kong UI Hider - Forever, based on Kong Automatic UI Hide
 - Details! windows fade as one window.
 - Bartender4 bars can be selected in the settings window.
 - Settings window: Copy Settings, Paste Settings and Reset Settings buttons. Unticking "Hide Selected Frame(s)" keeps the frame's settings.
+- New minimap button: left-click opens the settings, right-click turns fading on or off, drag to move. `/kong minimap` hides it.
 - "Unit in Instance" is correct after logging in or reloading inside an instance.
 - Saved frame paths are parsed instead of being run as code.
 - Fixed an error at logout when a profile has no mouseover groups.

@@ -11,7 +11,7 @@ This is the classic **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **Wo
 - **Combines conditions** with And, Or, Not and comparisons, on units, health, power, events, text and numbers.
 - **Per-frame settings:** hidden and shown transparency, fade-in and fade-out times, and the delay before fading out. Each condition can override them.
 - **Mouseover groups:** hover one bar and the whole group shows.
-- **Point and click setup:** type `/kong`, click a frame on screen, tick "Hide Selected Frame(s)", done.
+- **Point and click setup:** type `/kong` or click the minimap button, click a frame on screen, tick "Hide Selected Frame(s)", done.
 - **Profiles** per character or shared, and key bindings to switch fading on and off.
 
 ## New in the Forever port
@@ -23,13 +23,14 @@ This is the classic **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **Wo
 - **Details! windows** fade as one window.
 - **Bartender4 bars** can be selected.
 - **Copy, Paste and Reset Settings** buttons in the settings window.
+- **Minimap button:** left-click opens the settings, right-click turns fading on or off, drag it to move it. `/kong minimap` hides it.
 - Saved settings are read safely: frame paths are parsed, never run as code.
 
 The full list is in FEATURES.md in the source repository.
 
 ## Quick start
 
-1. Type `/kong`.
+1. Type `/kong`, or left-click the minimap button.
 2. Click the frame you want to hide (shift-click for several; the mouse wheel reaches frames underneath).
 3. Tick **Hide Selected Frame(s)**, then add conditions under **Show When**.
 4. Close the window.
@@ -42,8 +43,15 @@ The full list is in FEATURES.md in the source repository.
 
 ## Credits
 
-- Original addon: **Kong Automatic UI Hider 1.6a** by Xentaros, released into the public domain.
+- Original addon: **[Kong Automatic UI Hider](https://www.curseforge.com/wow/addons/kong) 1.6a** by Xentaros, released into the public domain.
 - Forever port: **Malven31**, made with Claude (Anthropic).
 - Libraries: AceGUI-3.0 and CallbackHandler-1.0 (Ace3 Development Team), LibStub.
 
 Licence: public domain. The bundled Ace3 libraries keep their own BSD-style licence.
+
+## Feedback
+
+Report bugs and suggest features in the comments on this page.
+
+<!-- Once the GitHub repository is public, add here, at the bottom of the page as CurseForge requires:
+Source code and issue tracker: https://github.com/Malven31/kong-ui-hider-forever -->

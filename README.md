@@ -20,7 +20,7 @@ Upgrading from an earlier Kong build for Forever? Replace the two folders. The f
 
 ## Quick start
 
-1. Type `/kong`. Fading pauses, and every frame on screen gets a clickable overlay.
+1. Type `/kong`, or left-click the minimap button. Fading pauses, and every frame on screen gets a clickable overlay.
 2. Click the frame you want to hide. Shift-click to select several, and use the mouse wheel to reach the frames underneath.
 3. Tick **Hide Selected Frame(s)**. The frame now shows on mouseover and in combat, and fades the rest of the time.
 4. Under **Show When**, add or change conditions. For example: show the chat for 15 seconds after a new message, or keep the player frame up until your mana is full.
@@ -34,10 +34,13 @@ Upgrading from an earlier Kong build for Forever? Replace the two folders. The f
 | `/kong enable`, `/kong disable`, `/kong toggle` | Switches all fading on or off |
 | `/kong profile list`, `current`, `create <name>`, `load <name>`, `delete <name>`, `reset` | Manages profiles |
 | `/kong reset` | Resets the current profile, after a confirmation |
+| `/kong minimap` | Hides or shows the minimap button |
 | `/kong powerlog` | Records 90 seconds of mana events into the saved variables, for troubleshooting |
 | `/kong help` | Lists the commands |
 
 Key bindings for enabling, disabling and toggling fading, and for opening the settings window, are under Key Bindings > AddOns.
+
+The **minimap button** opens or closes the settings window with a left-click, and turns fading on or off with a right-click. Drag it to move it around the minimap. Its position is saved for all your characters.
 
 ## Good to know on Forever
 
@@ -48,8 +51,8 @@ Key bindings for enabling, disabling and toggling fading, and for opening the se
 
 ## Credits
 
-- Original addon: **Kong Automatic UI Hider 1.6a** by Xentaros, released into the public domain.
-- Forever port: **Malven31**, made with Claude (Anthropic).
+- Original addon: **[Kong Automatic UI Hider](https://www.curseforge.com/wow/addons/kong) 1.6a** by Xentaros, released into the public domain.
+- Forever port: **Malven31**, made with Claude (Anthropic). The logo is the port's own.
 - Bundled libraries: AceGUI-3.0 and CallbackHandler-1.0 by the Ace3 Development Team (BSD-style licence), and LibStub (public domain).
 
 ## Licence

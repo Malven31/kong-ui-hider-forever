@@ -11,11 +11,22 @@ Everything the CurseForge project and file upload ask for, ready to paste.
    - Details! windows fade as one.
    - Copy, Paste and Reset Settings work.
    - The player frame stays up while mana regenerates and fades about 2.5 seconds after it is full.
+   - The minimap button opens and closes the settings, right-click turns fading on and off, dragging moves it, and the position survives `/reload`. `/kong minimap` hides and shows it.
    - Logging out raises no error.
 2. **Repository name:** rename `king-kong-frame-fader-forever` to `kong-ui-hider-forever` on GitHub (Settings > General > Repository name). GitHub redirects the old address.
 3. **Visibility:** the Source and Issues links below only work if the repository is public.
-4. **Logo:** CurseForge asks for a square project logo. Make one before creating the project.
+4. **Logo:** [logo.png](logo.png) (256×256, the port's own). The minimap icon `Kong/media/minimap.tga` is the same design.
 5. **Screenshots:** see [gallery/README.md](gallery/README.md).
+
+## Moderation rules to keep in mind
+
+From CurseForge's moderation policies (<https://support.curseforge.com/support/solutions/articles/9000197279-moderation-policies>):
+
+- The name, logo, summary and description are the port's own. Nothing is copied from the original's page.
+- The original creator is credited and linked, in the description's Credits section. Its licence (Public Domain) allows the port.
+- Outside links, such as the GitHub repository and any donation link, go at the very bottom of the description, small.
+- Keep a channel for bug reports open: the project's comments, plus GitHub Issues once the repository is public.
+- If CurseForge asks for changes or rejects the project, fix it and reply or appeal. Never delete the project or file to upload it again.
 
 ## Create the project
 
@@ -28,6 +39,7 @@ Everything the CurseForge project and file upload ask for, ready to paste.
 | Description | [description.md](description.md) |
 | Category | Miscellaneous, as the original Kong used. Add the closest interface categories CurseForge offers if you like (for example HUDs, Action Bars, Chat & Communication). |
 | Licence | Public Domain |
+| Logo | [logo.png](logo.png) |
 | Source | `https://github.com/Malven31/kong-ui-hider-forever` (after the rename, if public) |
 | Issues | `https://github.com/Malven31/kong-ui-hider-forever/issues` (same condition) |
 
