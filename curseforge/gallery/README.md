@@ -1,6 +1,10 @@
 # Gallery
 
-Screenshots for the CurseForge gallery go in this folder. CurseForge shows each image with a title and a description, so each shot below has both ready to paste.
+Screenshots for the CurseForge gallery go in this folder.
+
+`kong_fader_ui.gif` is the animation shown under the introduction of the CurseForge description and of the repository README. The description loads it from `https://raw.githubusercontent.com/Malven31/kong-ui-hider-forever/main/curseforge/gallery/kong_fader_ui.gif`, so keep the file name and keep the repository public. It was reduced from 59.7 MB to 9.6 MB without changing its size or frame rate: `magick original.gif -fuzz 4% -layers Optimize kong_fader_ui.gif` (ImageMagick) after an `ffmpeg` palette pass.
+
+`private/` is ignored by git. It keeps the originals that don't belong in the repository: captures too large to commit, and screenshots showing a character name. CurseForge shows each image with a title and a description, so each shot below has both ready to paste.
 
 Tips:
 

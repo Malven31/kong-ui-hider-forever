@@ -7,6 +7,8 @@
 
 This is the classic **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **World of Warcraft: Forever**, with fixes and additions for Forever's client.
 
+![The chat and the damage meters fading in on mouseover, then out again](https://raw.githubusercontent.com/Malven31/kong-ui-hider-forever/main/curseforge/gallery/kong_fader_ui.gif)
+
 ## What it does
 
 - **Fades any frame:** Blizzard's or another addon's, such as action bars, unit frames, chat, minimap, Details! windows and quest trackers.

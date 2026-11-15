@@ -6,6 +6,8 @@ Fade any part of your interface in and out on the conditions you choose: mouseov
 
 This is the original **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **World of Warcraft: Forever**.
 
+![The chat and the damage meters fading in on mouseover, then out again](curseforge/gallery/kong_fader_ui.gif)
+
 - [Features](FEATURES.md): everything the original does and what the port adds.
 - [Changelog](CHANGELOG.md)
 
