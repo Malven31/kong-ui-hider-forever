@@ -1,5 +1,8 @@
 # Kong UI Hider - Forever
 
+<!-- Download badge: replace PROJECT_ID with the number shown under "About Project" on the CurseForge page, once the project exists. The badge is served by cf.way2muchnoise.eu, the service CurseForge's support article on badges describes. -->
+![Downloads](https://cf.way2muchnoise.eu/full_PROJECT_ID_downloads.svg)
+
 **Fade any part of your interface in and out on the conditions you choose.** Action bars that appear on mouseover or in combat. A chat that shows up when a message arrives and hides again after. A player frame that stays until your mana is full. Your screen stays clear until you need something.
 
 This is the classic **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **World of Warcraft: Forever**, with fixes and additions for Forever's client.
