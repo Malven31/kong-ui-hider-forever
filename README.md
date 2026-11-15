@@ -1,5 +1,7 @@
 # Kong UI Hider - Forever
 
+[![CurseForge downloads](https://img.shields.io/curseforge/dt/1807559?logo=curseforge&label=downloads)](https://www.curseforge.com/wow/addons/kong-ui-hider-forever)
+
 Fade any part of your interface in and out on the conditions you choose: mouseover, combat, a new chat message, low health, mana regenerating, and many more. Your screen stays clear until you need something.
 
 This is the original **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **World of Warcraft: Forever**.
@@ -9,7 +11,7 @@ This is the original **Kong Automatic UI Hider 1.6a** by Xentaros, ported to **W
 
 ## Install
 
-Install it from CurseForge (Forever flavor), or by hand:
+Install it from [CurseForge](https://www.curseforge.com/wow/addons/kong-ui-hider-forever) (Forever flavor), or by hand:
 
 1. Copy the `Kong` and `KongConfig` folders into `World of Warcraft\_forever_\Interface\AddOns`.
 2. Restart the game.
