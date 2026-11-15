@@ -45,13 +45,9 @@ From CurseForge's moderation policies (<https://support.curseforge.com/support/s
 
 If the description editor has no Markdown mode, open `description.md` in a Markdown preview (VS Code: Ctrl+Shift+V) and copy the rendered text. The formatting comes along.
 
-**Download badge.** The top of the description shows the download count, `https://cf.way2muchnoise.eu/full_PROJECT_ID_downloads.svg`. The project ID only exists once the project is created, so:
+**Download badge.** The project ID is **1807559**. The top of the description shows the download count, `https://img.shields.io/curseforge/dt/1807559?logo=curseforge&label=downloads`. Until CurseForge's public API lists the project (after moderation), the badge reads "downloads: not found", and then shows the count.
 
-1. Create the project without the badge line.
-2. Copy the Project ID from the "About Project" box of the project page. It is a number, not the name in the URL.
-3. Replace `PROJECT_ID` in `description.md` with it, then paste the description again (or add the badge image at the top in the editor).
-
-If that service ever stops answering, shields.io serves the same count: `https://img.shields.io/curseforge/dt/PROJECT_ID?logo=curseforge&label=downloads`. CurseForge's rules allow functional badges at the top, as long as they are not promotional.
+The other badge service, the one CurseForge's support article on badges describes, is `https://cf.way2muchnoise.eu/full_1807559_downloads.svg`. It answered with a server error while the project wasn't listed, so it is only the fallback. CurseForge's rules allow functional badges at the top, as long as they are not promotional.
 
 ## Upload a file
 
