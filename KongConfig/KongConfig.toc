@@ -1,7 +1,7 @@
 ## Interface: 16001
 ## Title: Kong UI Hider - Forever (Config)
 ## Author: Xentaros, Forever port by Malven31
-## Version: 1.0.0
+## Version: 1.0.0-beta1
 ## Notes: The settings window of Kong UI Hider - Forever. It loads when you type /kong.
 ## Dependencies: Kong
 ## LoadOnDemand: 1
