@@ -32,13 +32,22 @@ if ($branch -ne 'main') { throw "Releases are made from main. The current branch
 if (Invoke-Git status --porcelain) { throw 'The working tree has uncommitted changes. Commit or discard them first.' }
 if (Invoke-Git tag --list $Version) { throw "The tag $Version already exists." }
 
-$changelog = [System.IO.File]::ReadAllText((Join-Path $root 'CHANGELOG.md'))
-$sectionFound = $false
-foreach ($candidate in @($Version, $baseVersion) | Select-Object -Unique) {
-    if ($changelog -match "(?m)^## $([regex]::Escape($candidate))(\s|$)") { $sectionFound = $true }
+# The section is what players read on CurseForge (website and app): it must exist and list something.
+# Same rule as scripts/release-notes.sh, which the GitHub workflow runs: the version's own section,
+# otherwise for a beta or alpha the section of its final version.
+$changelog = [System.IO.File]::ReadAllText((Join-Path $root 'CHANGELOG.md')) -replace "`r", ''
+function Get-ChangelogSection([string]$v) {
+    $m = [regex]::Match($changelog, "(?ms)^## $([regex]::Escape($v))(?:[ \t][^\n]*)?\n(.*?)(?=^## |\z)")
+    if ($m.Success) { return $m.Groups[1].Value }
+    return $null
 }
-if (-not $sectionFound) {
-    throw "CHANGELOG.md has no '## $Version' section. Add one first: it becomes the changelog of the CurseForge file."
+$section = Get-ChangelogSection $Version
+if ($null -eq $section -and $baseVersion -ne $Version) { $section = Get-ChangelogSection $baseVersion }
+if ($null -eq $section) {
+    throw "CHANGELOG.md has no '## $Version' section. Add one first, listing what is new, fixed or changed: it becomes the changelog of the CurseForge file."
+}
+if ($section -notmatch '(?m)^- \S') {
+    throw "The CHANGELOG.md section for $Version lists nothing. Add '- ' entries under ### New, ### Fixed or ### Changed: players read them on CurseForge."
 }
 
 # Rewrite only the "## Version:" line, keeping the files' encoding (UTF-8 without BOM) and line endings.

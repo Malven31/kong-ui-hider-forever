@@ -1,6 +1,9 @@
 # Release zips built by scripts/package.ps1
 dist/
 
+# Written by scripts/release-notes.sh for the packager
+RELEASE_NOTES.md
+
 # Original captures kept out of the repository: too large, or showing a character name
 curseforge/gallery/private/
 

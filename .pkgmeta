@@ -17,10 +17,12 @@ ignore:
   - README.md
   - FEATURES.md
   - CHANGELOG.md
+  - RELEASE_NOTES.md
 
-# The changelog shown on CurseForge for each file.
+# The changelog shown on CurseForge (website and app) for each file: only the CHANGELOG.md section of the
+# version being released, which the workflow writes to RELEASE_NOTES.md (scripts/release-notes.sh).
 manual-changelog:
-  filename: CHANGELOG.md
+  filename: RELEASE_NOTES.md
   markup-type: markdown
 
 enable-nolib-creation: no

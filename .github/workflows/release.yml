@@ -23,6 +23,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      # The changelog of the CurseForge file: this version's CHANGELOG.md section only (the newest one on
+      # a dry run). Fails when the section is missing or empty.
+      - name: Write this version's changelog
+        run: bash scripts/release-notes.sh "${{ github.ref_type == 'tag' && github.ref_name || '' }}"
+
       # Without a token the packager skips the CurseForge upload silently and the run still succeeds.
       - name: Check that the CurseForge token is set
         if: github.event_name == 'push'
