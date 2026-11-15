@@ -1,0 +1,43 @@
+# Packages the addon and uploads it to CurseForge whenever a tag is pushed (scripts/release.ps1 makes the
+# tag). A tag containing "beta" or "alpha" is uploaded as a beta or alpha file, any other tag as a release.
+#
+# Running the workflow by hand (Actions tab > Package > Run workflow) is a dry run: it builds the zip
+# without uploading it and attaches it to the run, to check what players would get.
+#
+# Needs the repository secret CF_API_TOKEN: a CurseForge API token from
+# https://authors.curseforge.com/#/settings/api-tokens
+name: Package
+
+on:
+  push:
+    tags:
+      - "*"
+  workflow_dispatch:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository with its full history and tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Package and upload to CurseForge
+        if: github.event_name == 'push'
+        uses: BigWigsMods/packager@v2
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+
+      - name: Package only (dry run, nothing is uploaded)
+        if: github.event_name == 'workflow_dispatch'
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -d
+
+      - name: Attach the zip to the run
+        uses: actions/upload-artifact@v4
+        with:
+          name: package
+          path: .release/*.zip
+          if-no-files-found: error

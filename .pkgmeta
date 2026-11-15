@@ -1,0 +1,26 @@
+# Packaging instructions for the BigWigs packager, which .github/workflows/release.yml runs on every tag.
+#
+# The repository root holds two addons side by side, Kong and KongConfig. Both are moved to the root of
+# the zip, the way Deadly Boss Mods packages its modules. The packager then reads Kong/Kong.toc for the
+# CurseForge project ID and the game version (## Interface: 16001 is World of Warcraft: Forever).
+package-as: Kong
+
+move-folders:
+  Kong/Kong: Kong
+  Kong/KongConfig: KongConfig
+
+# Paths in the repository, before the folders are moved. Files starting with a dot are never packaged.
+ignore:
+  - .github
+  - curseforge
+  - scripts
+  - README.md
+  - FEATURES.md
+  - CHANGELOG.md
+
+# The changelog shown on CurseForge for each file.
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+enable-nolib-creation: no

@@ -9,6 +9,7 @@
 ## IconTexture: Interface\AddOns\Kong\media\minimap
 ## X-Credits: Based on Kong Automatic UI Hider 1.6a by Xentaros, released into the public domain. Ported to World of Warcraft: Forever by Malven31, with Claude (Anthropic).
 ## X-License: Public Domain
+## X-Curse-Project-ID: 1807559
 
 libs\LibStub\LibStub.lua
 libs\LibUserSpecifiedConditions\LibUserSpecifiedConditions.xml

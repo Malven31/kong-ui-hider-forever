@@ -49,19 +49,30 @@ If the description editor has no Markdown mode, open `description.md` in a Markd
 
 The other badge service, the one CurseForge's support article on badges describes, is `https://cf.way2muchnoise.eu/full_1807559_downloads.svg`. It answered with a server error while the project wasn't listed, so it is only the fallback. CurseForge's rules allow functional badges at the top, as long as they are not promotional.
 
-## Upload a file
+## Automatic packaging (set up once)
 
-| Field | Value |
-|---|---|
-| File | `dist/KongUIHider-Forever-1.0.0.zip`, built by `powershell -File scripts/package.ps1` |
-| Display name | Kong UI Hider - Forever 1.0.0 |
-| Release type | Beta for the first upload, until the checks above are done; Release after |
-| Game version | Forever, 1.60.1 (the current Forever client) |
-| Changelog | The section for this version from [CHANGELOG.md](../CHANGELOG.md), with the changelog type set to Markdown |
+Files are packaged and uploaded by GitHub when a version tag is pushed: `.github/workflows/release.yml` runs the BigWigs packager, following `.pkgmeta`.
 
-## For each new version
+- **The zip** contains `Kong` and `KongConfig` at its root. `.pkgmeta` moves them there and leaves out the docs, `curseforge/` and `scripts/`. The `LICENSE` file goes inside `Kong`.
+- **The project** comes from `## X-Curse-Project-ID: 1807559` in `Kong/Kong.toc`.
+- **The game version** comes from `## Interface: 16001`, which the packager knows as Forever.
+- **The changelog** is `CHANGELOG.md`, in Markdown.
+- **The release type** comes from the tag: one containing `beta` or `alpha` makes a beta or alpha file, any other a release.
 
-1. Raise `## Version:` in both `Kong/Kong.toc` and `KongConfig/KongConfig.toc`.
-2. Add a section at the top of `CHANGELOG.md`.
-3. Run `scripts/package.ps1` and upload the new zip with that changelog section.
-4. Tick the newest Forever game version on the upload form.
+To set it up:
+
+1. Create a CurseForge API token at <https://authors.curseforge.com/#/settings/api-tokens>.
+2. On GitHub, open the repository's Settings > Secrets and variables > Actions > New repository secret. Name it `CF_API_TOKEN` and paste the token.
+3. **Leave CurseForge's own "package on tagged commit" option off.** With both on, every tag would be uploaded twice.
+4. **Dry run:** on GitHub, Actions > Package > Run workflow. When it finishes, download the "package" artifact and check that the zip holds exactly `Kong/` and `KongConfig/`. Nothing is uploaded.
+
+## Releasing a version
+
+1. Add a section at the top of `CHANGELOG.md`, for example `## 1.0.1 (2026-12-01)`, and commit it.
+2. Run `powershell -File scripts/release.ps1 -Version 1.0.1`. It checks that the working tree is clean and the changelog has the section, sets `## Version:` in both TOC files, commits, and tags.
+3. Push `main` and the tag (Sourcetree: Push with "Push all tags" ticked, or add `-Push` to the command).
+4. Follow the upload in GitHub's Actions tab, then check the new file on CurseForge: game version Forever 1.60.1, release type, changelog.
+
+**First version:** nothing has been tested in-game yet, so publish it as a beta: `scripts/release.ps1 -Version 1.0.0-beta1` (it uses the `## 1.0.0` changelog section). Once it is confirmed, release `1.0.0`.
+
+If an automatic upload fails, build the zip by hand with `powershell -File scripts/package.ps1` and upload `dist/KongUIHider-Forever-<version>.zip` on the project's Files page: game version Forever 1.60.1, changelog type Markdown.
