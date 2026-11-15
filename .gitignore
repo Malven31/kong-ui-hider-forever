@@ -1,0 +1,9 @@
+# Release zips built by scripts/package.ps1
+dist/
+
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
+*.bak
+*.tmp

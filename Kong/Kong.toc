@@ -1,0 +1,20 @@
+## Interface: 16001
+## Title: Kong UI Hider - Forever
+## Author: Xentaros, Forever port by Malven31
+## Version: 1.0.0
+## Notes: Fades interface frames in and out on the conditions you choose: mouseover, combat, chat, health, mana and more. Type /kong to configure.
+## SavedVariablesPerCharacter: Kong_Settings
+## SavedVariables: Kong_Profiles
+## OptionalDeps: Tukui, SexyMap
+## X-Credits: Based on Kong Automatic UI Hider 1.6a by Xentaros, released into the public domain. Ported to World of Warcraft: Forever by Malven31, with Claude (Anthropic).
+## X-License: Public Domain
+
+libs\LibStub\LibStub.lua
+libs\LibUserSpecifiedConditions\LibUserSpecifiedConditions.xml
+
+classes\EventDispatcher.lua
+classes\Fader.lua
+classes\ObjectPool.lua
+
+Kong.lua
+CommandLine.lua
