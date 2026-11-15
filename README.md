@@ -67,7 +67,7 @@ Public domain, see [LICENSE](LICENSE). The bundled Ace3 libraries keep their own
 
 Releases are packaged and uploaded to CurseForge automatically when a version tag is pushed. The GitHub workflow `.github/workflows/release.yml` runs the [BigWigs packager](https://github.com/BigWigsMods/packager), following `.pkgmeta`.
 
-1. Add a section for the new version at the top of `CHANGELOG.md`, for example `## 1.0.1 (2026-12-01)`, and commit it.
+1. Add a section for the new version at the top of `CHANGELOG.md`, for example `## 1.0.1 (2026-12-01)`, summarising for players what is new (`### New`), fixed (`### Fixed`) and changed (`### Changed`). Commit it. This section, and only this one, becomes the changelog of the file on CurseForge (website and app). A release without it is refused.
 2. Run `powershell -File scripts/release.ps1 -Version 1.0.1`. It sets the version in both TOC files, commits, and tags.
 3. Push the branch and the tag, or add `-Push` to the command.
 

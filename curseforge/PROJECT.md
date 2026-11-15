@@ -56,7 +56,8 @@ Files are packaged and uploaded by GitHub when a version tag is pushed: `.github
 - **The zip** contains `Kong` and `KongConfig` at its root. `.pkgmeta` moves them there and leaves out the docs, `curseforge/` and `scripts/`. The `LICENSE` file goes inside `Kong`.
 - **The project** comes from `## X-Curse-Project-ID: 1807559` in `Kong/Kong.toc`.
 - **The game version** comes from `## Interface: 16001`, which the packager knows as Forever.
-- **The changelog** is `CHANGELOG.md`, in Markdown.
+- **The changelog** of each file is that version's section of `CHANGELOG.md`, in Markdown. `scripts/release-notes.sh` extracts it into `RELEASE_NOTES.md` before packaging, so it shows on the website and in the CurseForge app. The workflow fails if the section is missing or lists nothing.
+- **A missing token fails the run** with an error, instead of the packager silently skipping the upload.
 - **The release type** comes from the tag: one containing `beta` or `alpha` makes a beta or alpha file, any other a release.
 
 To set it up:
@@ -68,7 +69,7 @@ To set it up:
 
 ## Releasing a version
 
-1. Add a section at the top of `CHANGELOG.md`, for example `## 1.0.1 (2026-12-01)`, and commit it.
+1. Add a section at the top of `CHANGELOG.md`, for example `## 1.0.1 (2026-12-01)`, with `- ` entries under `### New`, `### Fixed` and `### Changed`: a player-facing summary of the new features and fixed bugs. Commit it.
 2. Run `powershell -File scripts/release.ps1 -Version 1.0.1`. It checks that the working tree is clean and the changelog has the section, sets `## Version:` in both TOC files, commits, and tags.
 3. Push `main` and the tag (Sourcetree: Push with "Push all tags" ticked, or add `-Push` to the command).
 4. Follow the upload in GitHub's Actions tab, then check the new file on CurseForge: game version Forever 1.60.1, release type, changelog.
