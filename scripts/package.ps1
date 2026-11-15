@@ -1,5 +1,5 @@
-# Builds the upload-ready zip in dist/: the Kong and KongConfig folders at the root of the archive,
-# named after the version in Kong.toc. Entries use forward slashes, which Compress-Archive on
+# Builds the upload-ready zip in dist/: the Kong and KongConfig folders at the root of the archive, and
+# the licence in Kong, named after the version in Kong.toc. Same contents as the GitHub workflow's zip. Entries use forward slashes, which Compress-Archive on
 # PowerShell 5.1 does not guarantee.
 $ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.IO.Compression
@@ -29,6 +29,9 @@ try {
             $count++
         }
     }
+    # The licence goes inside Kong, as in the zip the GitHub workflow builds (.pkgmeta: package-as Kong).
+    [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, (Join-Path $root 'LICENSE'), 'Kong/LICENSE') | Out-Null
+    $count++
 } finally {
     $zip.Dispose()
 }

@@ -1,8 +1,10 @@
-# Packages the addon and uploads it to CurseForge whenever a tag is pushed (scripts/release.ps1 makes the
-# tag). A tag containing "beta" or "alpha" is uploaded as a beta or alpha file, any other tag as a release.
+# Packages the addon on every push to main and every tag, and uploads it to CurseForge only for a pushed
+# tag (scripts/release.ps1 makes the tag). A tag containing "beta" or "alpha" is uploaded as a beta or alpha
+# file, any other tag as a release.
 #
-# Running the workflow by hand (Actions tab > Package > Run workflow) is a dry run: it builds the zip
-# without uploading it and attaches it to the run, to check what players would get.
+# Any other run is a dry run: a push to main, or a run started by hand (Actions tab > Package > Run
+# workflow). It checks the CurseForge token, builds the zip, checks its contents and attaches it to the
+# run, without uploading anything.
 #
 # Needs the repository secret CF_API_TOKEN: a CurseForge API token from
 # https://authors.curseforge.com/#/settings/api-tokens
@@ -10,6 +12,8 @@ name: Package
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "*"
   workflow_dispatch:
@@ -28,21 +32,35 @@ jobs:
       - name: Write this version's changelog
         run: bash scripts/release-notes.sh "${{ github.ref_type == 'tag' && github.ref_name || '' }}"
 
-      # Without a token the packager skips the CurseForge upload silently and the run still succeeds.
-      - name: Check that the CurseForge token is set
-        if: github.event_name == 'push'
+      # Without a valid token the packager skips the upload, or fails late. This makes the same first
+      # request as the packager (CurseForge's list of game versions), which uploads nothing: 200 means
+      # the token is accepted, 401 that it is missing, 403 that it is wrong or revoked.
+      - name: Check the CurseForge token
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
         run: |
           if [ -z "$CF_API_TOKEN" ]; then
-            echo "::error::The CF_API_TOKEN secret is missing, so nothing would be uploaded to CurseForge. Add it under Settings > Secrets and variables > Actions > Repository secrets, then re-run this workflow."
+            echo "::error::The CF_API_TOKEN secret is missing, so nothing could be uploaded to CurseForge. Add it under Settings > Secrets and variables > Actions > Repository secrets."
             exit 1
+          fi
+          versions="$RUNNER_TEMP/cf-versions.json"
+          status=$(curl -s -o "$versions" -w "%{http_code}" -H "x-api-token: $CF_API_TOKEN" https://wow.curseforge.com/api/game/wow/versions)
+          if [ "$status" != "200" ]; then
+            echo "::error::CurseForge refused the CF_API_TOKEN secret (HTTP $status). Create a new token at https://authors.curseforge.com/#/settings/api-tokens and replace the secret."
+            exit 1
+          fi
+          echo "CurseForge accepts the token."
+          # Interface 16001 is the game version Forever 1.60.1 (game version type 88568).
+          if jq -e 'any(.[]; .gameVersionTypeID == 88568 and .name == "1.60.1")' "$versions" > /dev/null; then
+            echo "CurseForge lists the game version Forever 1.60.1."
+          else
+            echo "::warning::CurseForge doesn't list the game version Forever 1.60.1. The packager will pick the closest Forever version."
           fi
 
       # -n "<zip name>:<CurseForge display name>": both "KongUIHider-Forever-<version>", like the files
       # uploaded by hand.
       - name: Package and upload to CurseForge
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref_type == 'tag'
         uses: BigWigsMods/packager@v2
         with:
           args: -n "KongUIHider-Forever-{project-version}:KongUIHider-Forever-{project-version}"
@@ -50,10 +68,35 @@ jobs:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
 
       - name: Package only (dry run, nothing is uploaded)
-        if: github.event_name == 'workflow_dispatch'
+        if: github.event_name != 'push' || github.ref_type != 'tag'
         uses: BigWigsMods/packager@v2
         with:
           args: -d -n "KongUIHider-Forever-{project-version}:KongUIHider-Forever-{project-version}"
+
+      # What players get: Kong/ and KongConfig/ at the root of the zip, both TOC files and the licence,
+      # and none of the repository's own files (docs, curseforge/, scripts/, dotfiles).
+      - name: Check the zip's contents
+        run: |
+          zip=$(ls .release/*.zip)
+          listing="$RUNNER_TEMP/zip-files.txt"
+          unzip -Z1 "$zip" | sort > "$listing"
+          echo "$(basename "$zip"): $(grep -vc '/$' "$listing") files"
+          roots=$(cut -d/ -f1 "$listing" | sort -u | paste -sd' ')
+          if [ "$roots" != "Kong KongConfig" ]; then
+            echo "::error::The zip's root holds \"$roots\" instead of exactly Kong and KongConfig."
+            exit 1
+          fi
+          for file in Kong/Kong.toc KongConfig/KongConfig.toc Kong/LICENSE Kong/media/minimap.tga; do
+            if ! grep -qx "$file" "$listing"; then
+              echo "::error::$file is missing from the zip."
+              exit 1
+            fi
+          done
+          if grep -E '(^|/)\.|^Kong/(README\.md|FEATURES\.md|CHANGELOG\.md|RELEASE_NOTES\.md|curseforge/|scripts/)' "$listing"; then
+            echo "::error::The zip holds repository files that players shouldn't get (listed above). Add them to the ignore list in .pkgmeta."
+            exit 1
+          fi
+          echo "The zip holds only Kong/ and KongConfig/, with both TOC files and the licence."
 
       - name: Attach the zip to the run
         uses: actions/upload-artifact@v4

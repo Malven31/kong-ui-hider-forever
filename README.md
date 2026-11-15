@@ -71,6 +71,6 @@ Releases are packaged and uploaded to CurseForge automatically when a version ta
 2. Run `powershell -File scripts/release.ps1 -Version 1.0.1`. It sets the version in both TOC files, commits, and tags.
 3. Push the branch and the tag, or add `-Push` to the command.
 
-A tag containing `beta` or `alpha` (for example `1.1.0-beta1`) becomes a beta or alpha file on CurseForge, and any other tag a release. To check a build without publishing it, run the workflow by hand from the Actions tab: it attaches the zip to the run instead of uploading it.
+A tag containing `beta` or `alpha` (for example `1.1.0-beta1`) becomes a beta or alpha file on CurseForge, and any other tag a release. Every push to `main` is a dry run, and so is a run started by hand from the Actions tab. It checks that CurseForge accepts the token, builds the zip, checks its contents and attaches it to the run, without uploading anything.
 
-To build a zip locally instead, run `powershell -File scripts/package.ps1`. It writes `dist/KongUIHider-Forever-<version>.zip`, with `Kong` and `KongConfig` at the root of the archive.
+To build a zip locally instead, run `powershell -File scripts/package.ps1`. It writes `dist/KongUIHider-Forever-<version>.zip`, with `Kong` and `KongConfig` at the root of the archive and the licence in `Kong`, like the workflow's zip.

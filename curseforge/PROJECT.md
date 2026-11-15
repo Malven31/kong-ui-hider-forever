@@ -57,7 +57,8 @@ Files are packaged and uploaded by GitHub when a version tag is pushed: `.github
 - **The project** comes from `## X-Curse-Project-ID: 1807559` in `Kong/Kong.toc`.
 - **The game version** comes from `## Interface: 16001`, which the packager knows as Forever.
 - **The changelog** of each file is that version's section of `CHANGELOG.md`, in Markdown. `scripts/release-notes.sh` extracts it into `RELEASE_NOTES.md` before packaging, so it shows on the website and in the CurseForge app. The workflow fails if the section is missing or lists nothing.
-- **A missing token fails the run** with an error, instead of the packager silently skipping the upload.
+- **The token is checked on every run**, with CurseForge itself and without uploading anything. A missing, wrong or revoked token fails the run with an error, instead of the packager silently skipping the upload.
+- **Every push to `main` is a dry run.** It checks the token, builds the zip, checks it (`Kong/` and `KongConfig/` at the root, both TOC files and the licence, no repository files) and attaches it to the run. Nothing is uploaded: only a pushed tag uploads.
 - **File name and display name:** `KongUIHider-Forever-<version>`, the same as files uploaded by hand.
 - **The release type** comes from the tag: one containing `beta` or `alpha` makes a beta or alpha file, any other a release.
 
@@ -66,7 +67,7 @@ To set it up:
 1. Create a CurseForge API token at <https://authors.curseforge.com/#/settings/api-tokens>.
 2. On GitHub, open the repository's Settings > Secrets and variables > Actions > New repository secret. Name it `CF_API_TOKEN` and paste the token.
 3. **Leave CurseForge's own "package on tagged commit" option off.** With both on, every tag would be uploaded twice.
-4. **Dry run:** on GitHub, Actions > Package > Run workflow. When it finishes, download the "package" artifact and check that the zip holds exactly `Kong/` and `KongConfig/`. Nothing is uploaded.
+4. **Dry run:** push to `main`, or on GitHub open Actions > Package > Run workflow. A green run means CurseForge accepts the token and the zip holds exactly what players should get. Nothing is uploaded.
 
 ## Releasing a version
 
