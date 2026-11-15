@@ -40,4 +40,6 @@ jobs:
         with:
           name: package
           path: .release/*.zip
+          # .release starts with a dot, and upload-artifact skips hidden files by default since v4.4.
+          include-hidden-files: true
           if-no-files-found: error
