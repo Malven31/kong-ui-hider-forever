@@ -75,8 +75,22 @@ jobs:
 
       # What players get: Kong/ and KongConfig/ at the root of the zip, both TOC files and the licence,
       # and none of the repository's own files (docs, curseforge/, scripts/, dotfiles).
+      # A push to main whose commit already carries a tag (release.ps1 -Push sends both) makes no zip: the
+      # packager prints 'Found future tag "<tag>", not packaging.' and leaves the build to the tag's own run.
       - name: Check the zip's contents
+        id: zip
         run: |
+          if ! ls .release/*.zip > /dev/null 2>&1; then
+            tag=$(git tag --points-at HEAD | paste -sd' ')
+            if [ "$GITHUB_REF_TYPE" = "branch" ] && [ -n "$tag" ]; then
+              echo "::notice::No zip: this commit carries the tag $tag, so the packager left the build to that tag's own run."
+              echo "built=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "::error::The packager made no zip in .release/."
+            exit 1
+          fi
+          echo "built=true" >> "$GITHUB_OUTPUT"
           zip=$(ls .release/*.zip)
           listing="$RUNNER_TEMP/zip-files.txt"
           unzip -Z1 "$zip" | sort > "$listing"
@@ -99,6 +113,7 @@ jobs:
           echo "The zip holds only Kong/ and KongConfig/, with both TOC files and the licence."
 
       - name: Attach the zip to the run
+        if: steps.zip.outputs.built == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: package

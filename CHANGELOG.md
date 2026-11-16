@@ -2,7 +2,7 @@
 
 Each version has a section `## <version> (<date>)` summarising, for players, what is new (`### New`), fixed (`### Fixed`) and changed (`### Changed`). That section, and only that section, is sent to CurseForge as the changelog of the version's file, so it shows on the website and in the CurseForge app. A beta (`1.1.0-beta1`) uses its own section if it has one, otherwise the section of its final version (`1.1.0`). The full feature list is in FEATURES.md.
 
-## 1.0.0 (2026-11-15)
+## 1.0.0 (2026-11-16)
 
 First public release of Kong UI Hider - Forever, based on Kong Automatic UI Hider 1.6a by Xentaros.
 
