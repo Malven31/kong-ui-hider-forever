@@ -1,7 +1,7 @@
 ## Interface: 16001
 ## Title: Kong UI Hider - Forever
 ## Author: Xentaros, Forever port by Malven31
-## Version: 1.0.0-beta1
+## Version: 1.0.0
 ## Notes: Fades interface frames in and out on the conditions you choose: mouseover, combat, chat, health, mana and more. Type /kong to configure.
 ## SavedVariablesPerCharacter: Kong_Settings
 ## SavedVariables: Kong_Profiles, Kong_Minimap
